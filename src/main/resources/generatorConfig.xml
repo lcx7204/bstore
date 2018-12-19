@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--导入属性配置-->
+    <properties resource="datasource.properties"></properties>
+
+    <!--指定特定数据库的jdbc驱动jar包的位置-->
+    <classPathEntry location="${db.driverLocation}"></classPathEntry>
+
+    <context id="default" targetRuntime="Mybatis3">
+        <!--optional,旨在创建class时，对注释进行控制-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"></property>
+            <property name="suppressAllComments" value="true"></property>
+        </commentGenerator>
+
+        <!--JDBC数据库连接-->
+        <jdbcConnection
+                driverClass="${db.driverClassName}"
+                connectionURL="${db.url}"
+                userId="${db.username}"
+                password="${db.password}">
+        </jdbcConnection>
+
+        <!--类型处理器，在数据库和java之间进行类型转换控制-->
+        <javaTypeResolver>
+            <property name="forBigDecimals" value="false"></property>
+        </javaTypeResolver>
+
+        <!--Model模型生成器-->
+        <javaModelGenerator targetPackage="com.bstore.pojo" targetProject="./src/main/java">
+            <!--是否允许子包-->
+            <property name="enableSubPackages" value="false"></property>
+            <!--是否对model添加构造函数-->
+            <property name="constructorBased" value="true"></property>
+            <!--是否对char类型的列的数据进行trim操作-->
+            <property name="trimStrings" value="true"></property>
+            <!--建立Model对象是否不可改变，及生成的对象没有setter方法，只有构造方法-->
+            <property name="immutable" value="false"></property>
+        </javaModelGenerator>
+
+        <!--mapper映射文件所在目录，每个表一个mapper映射文件-->
+        <sqlMapGenerator targetPackage="mappers" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="false"></property>
+        </sqlMapGenerator>
+
+        <!--mapper接口dao生成位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.bstore.dao" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="false"></property>
+        </javaClientGenerator>
+
+        <table tableName="mmall_shipping" domainObjectName="Shipping" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_cart" domainObjectName="Cart" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_cart_item" domainObjectName="CartItem" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_category" domainObjectName="Category" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_order" domainObjectName="Order" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_order_item" domainObjectName="OrderItem" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_pay_info" domainObjectName="PayInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_product" domainObjectName="Product" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <columnOverride column="detail" jdbcType="VARCHAR" />
+            <columnOverride column="sub_images" jdbcType="VARCHAR" />
+        </table>
+        <table tableName="mmall_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>
