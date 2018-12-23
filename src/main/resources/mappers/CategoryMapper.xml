@@ -116,4 +116,13 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自己写的-->
+  <!--获取商品平类平级节点信息-->
+  <select id="getCategoty" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mmall_category
+    where parentId = #{parentId}
+  </select>
 </mapper>
