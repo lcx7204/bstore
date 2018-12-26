@@ -82,8 +82,9 @@ public class CategoryServiceImpl implements ICategoryService {
         if(CollectionUtils.isEmpty(categoryList)){  //判断是否是空集合
             //打印空集合日志
             logger.info("未找到当前分类的子分类");
+            return ServerResponse.createByErrorMessage("没有该品类信息");
         }
-        return null;
+        return ServerResponse.createBySuccess(categoryList);
     }
 
     /**

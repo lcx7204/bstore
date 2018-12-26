@@ -1,5 +1,9 @@
 package com.bstore.common;
 
+import com.google.common.collect.Sets;
+
+import java.util.Set;
+
 /**
  * create by Jakarta
  */
@@ -15,5 +19,10 @@ public class Const {
     public interface Role{
         int ROLE_CUSTOMER = 0;  //普通用户
         int ROLE_ADMIN = 1;     //管理员
+    }
+
+    //排序
+    public interface ProductListOrderBy{
+        Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc","price_asc");
     }
 }

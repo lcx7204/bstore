@@ -81,7 +81,7 @@ public class CategoryManageController {
      * @param categoryId
      * @return
      */
-    @RequestMapping(value = "get_gategory.do",method = RequestMethod.GET)
+    @RequestMapping(value = "get_category.do",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse getCategory(HttpSession session,@RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){  //默认id为0,根节点
         //先判断用户是否登录

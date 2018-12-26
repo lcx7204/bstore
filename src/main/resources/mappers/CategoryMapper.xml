@@ -123,6 +123,6 @@
     select 
     <include refid="Base_Column_List" />
     from mmall_category
-    where parentId = #{parentId}
+    where parent_id = #{parentId}
   </select>
 </mapper>
