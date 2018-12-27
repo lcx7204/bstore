@@ -116,4 +116,58 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自己写的SQL-->
+
+  <!--到购物车表中查询是否有商品信息-->
+  <select id="selectProductByUserIdANDProductId" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mmall_cart
+    where user_id = #{userId}
+    and product_id = #{productId}
+  </select>
+
+  <!--根据用户Id查询购物车集合-->
+  <select id="selectProductByUserId" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mmall_cart
+    where user_id = #{userId}
+  </select>
+
+  <!--查询是否有未勾选的商品-->
+  <select id="selectCartProductsCheckedStatusByUserId" parameterType="int" resultType="int">
+    select count(1) from mmall_cart where checked = 0 and user_id = #{userId}
+  </select>
+
+  <!--删除购物车中的商品信息-->
+  <delete id="deleteCartProductByUserIdANDProductId" parameterType="map">
+    delete from mmall_cart
+    where user_id = #{userId}
+    <if test="productList != null">
+      and product_id in 
+      <foreach collection="productList" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+  </delete>
+
+  <!--更新购物车中商品的选中状态-->
+  <update id="checkOrUnCheckProduct" parameterType="map">
+    update mmall_cart
+    set checked = #{checked},
+    update_time = now()
+    where user_id = #{userId}
+    <if test="productId != null">
+      and product_id = #{productId}
+    </if>
+  </update>
+
+  <!--根据用户Id查询购物车中商品数量-->
+  <select id="getCartProductCount" parameterType="int" resultType="int">  <!--如果查询结果sum为空，则赋予返回值为0-->
+    select IFNULL(sum(quantity),0) as count
+    from mmall_cart
+    where user_id = #{userId}
+  </select>
 </mapper>
