@@ -198,4 +198,40 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自己写的-->
+
+  <!--根据用户Id和orderNo查询订单信息-->
+  <select id="selectOrderByUserIdANDOrderNo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_order
+    where user_id = #{userId}
+    and order_no = #{orderNo}
+  </select>
+  
+  <!--根据用户Id查找订单集合-->
+  <select id="selectByUserId" parameterType="int" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mmall_order
+    where user_id = #{userId}
+    order by create_time desc
+  </select>
+
+  <!--管理员分页获取订单集合-->
+  <select id="selectAllOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_order
+    order by create_time desc
+  </select>
+
+  <!--管理员获取订单详情-->
+  <select id="selectOrderByOrderNo" parameterType="long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_order
+    where order_no = #{orderNo}
+  </select>
 </mapper>
